@@ -29,6 +29,8 @@ public class TPCharacterController : MonoBehaviour
             rb.AddRelativeForce(movement * -speed);
         }
         rb.AddRelativeForce (movement * speed);
+        Debug.Log(transform.forward);
+        rb.AddRelativeForce (transform.forward * speed * -1);
         if (rb.velocity.y > 1) {
             rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
         }
