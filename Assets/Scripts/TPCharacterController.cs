@@ -2,20 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThirdPersonCharacterController : MonoBehaviour
+public class TPCharacterController : MonoBehaviour
 {
-    public float Speed;
-    // Start is called before the first frame update
-    void Start()
-    {
-        PlayerMovement();
-    }
+    public float speed;
 
-    void PlayerMovement()
+    private Rigidbody rb;
+
+    void Start ()
     {
-        float hor = Input.GetAxis("Horizontal");
-        float ver = Input.GetAxis("Vertical");
-        Vector3 playerMovement = new Vector3(hor, 0f, ver) * Speed * Time.deltaTime;
-        transform.Translate(playerMovement, Space.Self);
+        rb = GetComponent<Rigidbody>();
+    }
+    void FixedUpdate ()
+    {
+
+        float moveHorizontal = Input.GetAxis ("Horizontal");
+        float moveVertical = Input.GetAxis ("Vertical");
+
+        // Rotate the cube by converting the angles into a quaternion.
+        Quaternion target = Quaternion.Euler(0, moveHorizontal * 45, 0);
+
+        // Dampen towards the target rotation
+        transform.rotation = Quaternion.Slerp(transform.rotation, target,  Time.deltaTime * 5.0f);
+        Vector3 movement = new Vector3 (0.0f, 0.0f, -moveVertical);
+        Debug.Log(rb.velocity[1]);
+        if (rb.velocity[1] < -15) {
+            rb.AddRelativeForce(movement * -speed);
+        }
+        rb.AddRelativeForce (movement * speed);
+        if (rb.velocity.y > 1) {
+            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        }
     }
 }
