@@ -9,6 +9,8 @@ public class PlayerAndOtherSounds : MonoBehaviour
     public AudioClip skiSound;
     public AudioClip landingSound;
     public AudioSource audioSource;
+
+    public ParticleSystem particles;
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -17,7 +19,6 @@ public class PlayerAndOtherSounds : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     
     }
 
@@ -30,6 +31,7 @@ public class PlayerAndOtherSounds : MonoBehaviour
             audioSource.Stop();
             audioSource.PlayOneShot(landingSound, 0.7F);
             isGrounded = true;
+            particles.Play();
             audioSource.PlayOneShot(skiSound, 0.7F);
         }
     }
@@ -42,6 +44,7 @@ public class PlayerAndOtherSounds : MonoBehaviour
         {
             audioSource.Stop();
             isGrounded = false;
+            particles.Stop();
             audioSource.PlayOneShot(fallingSound, 0.7F);
         }
 
