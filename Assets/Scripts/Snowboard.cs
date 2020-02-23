@@ -6,6 +6,20 @@ public class Snowboard : MonoBehaviour
 {
     public Transform target;
     public float y_offset;
+
+    // public AudioClip fallingSound;
+    // public AudioClip skiSound;
+    // public AudioClip landingSound;
+    // public AudioSource audioSource;
+    // public Rigidbody rb;
+
+    void Start()
+    {
+        // audioSource = GetComponent<AudioSource>();
+        // rb = GetComponent<Rigidbody>();
+    }
+    
+    
     void FixedUpdate()
     {
         Vector3 desiredPosition = target.position - new Vector3(0, y_offset, 0);
@@ -22,6 +36,34 @@ public class Snowboard : MonoBehaviour
 
         target.rotation = rotat;
 
-        
     }
+    
+    // public bool isGrounded = true;
+
+    // void OnCollisionEnter(Collision col)
+    // {
+        
+    //     if (col.gameObject.CompareTag("Terrain"))
+    //     {
+    //         audioSource.Stop();
+    //         audioSource.PlayOneShot(landingSound, 0.7F);
+    //         isGrounded = true;
+    //         audioSource.PlayOneShot(skiSound, 0.7F);
+    //     }
+        
+    // }
+
+
+
+    // void OnCollisionExit(Collision col) 
+    // {
+    //     if (col.gameObject.CompareTag("Terrain"))
+    //     {
+    //         audioSource.Stop();
+    //         isGrounded = false;
+    //         audioSource.PlayOneShot(fallingSound, 0.7F);
+    //     }
+
+    // }
+
 }
